@@ -1,1 +1,2 @@
-# django-petra-starter
+# geni-sys-rec-backend
+geni system record backend api

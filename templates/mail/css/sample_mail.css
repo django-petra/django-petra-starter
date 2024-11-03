@@ -1,0 +1,50 @@
+/* Reset some default browser styles */
+body,
+table,
+td {
+  margin: 0;
+  padding: 0;
+}
+
+/* Set a background color for the body */
+body {
+  background-color: #f0f0f0;
+  font-family: "Arial", sans-serif;
+}
+
+/* Style the container table */
+table.container {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: #ffffff;
+}
+
+/* Style the header table */
+table.header {
+  background-color: #333333;
+  color: #ffffff;
+  padding: 10px;
+  width: 100%;
+}
+
+/* Style the main content table */
+table.content {
+  padding: 20px;
+  width: 100%;
+}
+
+/* Style the footer table */
+table.footer {
+  background-color: #333333;
+  color: #ffffff;
+  text-align: center;
+  padding: 10px;
+  width: 100%;
+}
+
+/* Style links in the content */
+table.content a {
+  color: #007bff;
+  text-decoration: none;
+}

@@ -5,8 +5,6 @@ from django_petra.raw_query.helpers import exclude_fields
 from django_petra.petra_core import serializers
 
 class UserSerializer(ModelSerializer):
-    days_since_joined = serializers.SerializerMethodField()
-    id = serializers.CharField()
     
     class Meta:
         model = User
@@ -17,7 +15,6 @@ class UserSerializer(ModelSerializer):
     def to_representation(self, instance):
         # Modify the representation of the object
         representation = super().to_representation(instance)
-        representation['name'] = f"Modified: {instance.name}"
         representation = exclude_fields(representation, [ 'password'])
         return representation
         

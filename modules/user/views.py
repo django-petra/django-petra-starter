@@ -16,9 +16,19 @@ class UserViewset(ViewSet):
       
   def get_users(self, request):
     query = User
-    query = query.objects.filter().order_by('-created')
-    query = query.all()
-    data = paginate(request=request, queryset=query, serializer_class=UserSerializer, per_page=4, wrap='users')
+    query = query.objects.filter()
+    additional_data = {
+        'total_active_users': User.objects.filter(is_active=True).count(),
+        'last_registered': User.objects.order_by('-created').first().created if User.objects.exists() else None
+    }
+    data = paginate(
+        request=request, 
+        queryset=query, 
+        serializer_class=UserSerializer, 
+        # per_page=4, 
+        # wrap='users',
+        additional_data=additional_data
+    )
     
     return Response(data, status=status.HTTP_200_OK)
     

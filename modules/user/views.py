@@ -11,6 +11,7 @@ from modules.common.permissions.auth import IsAuthenticated
 class UserViewSet(ViewSet):
 
     def get_permissions(self):
+        """Configure permission settings for different API endpoints."""
         self.set_permission(IsAuthenticated).only(['get_users'])
         return self.retrieve_permissions(self)
       

@@ -67,11 +67,12 @@ class AuthorizationMiddleware:
                 }, status=401)
         else:
             # Handle case when no Authorization header is present
-            return JsonResponse({
-                'status': 'error',
-                'message': 'Authorization header is required',
-                'code': 401
-            }, status=401)
+            # return JsonResponse({
+            #     'status': 'error',
+            #     'message': 'Authorization header is required',
+            #     'code': 401
+            # }, status=401)
+            pass
 
         response = self.get_response(request)
         return response

@@ -2,11 +2,14 @@ from django.urls import path
 from modules.user.views import UserViewSet
 from django_petra.router import Router, Route
 
+API_VERSION = 'v1'
+
 routes = [
     Router.post('registration/', UserViewSet.registration),
     Router.post('login/', UserViewSet.login),
-    Router.get('get/', UserViewSet.get_users),
-    Router.get('single-user/<uuid:user_id>', UserViewSet.get_single_user),
+    Router.get('users/', UserViewSet.get_users),
+    Router.get('users/<uuid:user_id>', UserViewSet.get_single_user),
+    Router.delete('users/<uuid:user_id>', UserViewSet.delete_user),
     Router.post('q-check', UserViewSet.the_query_check),
 ]
 

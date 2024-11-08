@@ -103,11 +103,16 @@ class UserViewSet(ViewSet):
         
         return Response(data, status=status.HTTP_200_OK)
     
-    
+
     def get_single_user(self, request, user_id):
         user = User.objects.get(uuid=user_id)
         serializer = UserSerializer(user)
         return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    def delete_user(self, request, user_id):
+        user = User.objects.get(uuid=user_id)
+        user.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
     
 
     def the_query_check(self, request):

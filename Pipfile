@@ -7,9 +7,9 @@ name = "pypi"
 twine = "*"
 wheel = "*"
 setuptools = "*"
-django-petra = {file = "django-petra", editable = true}
 bcrypt = "*"
 python-jose = "*"
+django-petra = {file = "django-petra", editable = true}
 
 [dev-packages]
 

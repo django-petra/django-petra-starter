@@ -14,25 +14,8 @@ class UserViewSet(ViewSet):
         """Configure permission settings for different API endpoints."""
         self.set_permission(IsAuthenticated).only(['get_users'])
         return self.retrieve_permissions(self)
-      
-    def get_users(self, request):
-        query = User
-        query = query.objects.filter()
-        additional_data = {
-            'total_active_users': User.objects.filter(is_active=True).count(),
-            'last_registered': User.objects.order_by('-created').first().created if User.objects.exists() else None
-        }
-        data = paginate(
-            request=request, 
-            queryset=query, 
-            serializer_class=UserSerializer, 
-            # per_page=4, 
-            # wrap='users',
-            additional_data=additional_data
-        )
-        
-        return Response(data, status=status.HTTP_200_OK)
     
+
     @petra_dto(form_class=AddUserForm)
     def registration(self, request, form):
         # Process valid data
@@ -54,7 +37,7 @@ class UserViewSet(ViewSet):
             'message': 'Registration successful',
             'user': serializer.data
         }, status=status.HTTP_201_CREATED)
-
+    
     def login(self, request):
         from django_petra.helpers import get_request_data
         
@@ -101,6 +84,32 @@ class UserViewSet(ViewSet):
             'refresh_token': refresh_token
         }, status=status.HTTP_200_OK)
   
+      
+    def get_users(self, request):
+        query = User
+        query = query.objects.filter()
+        additional_data = {
+            'total_active_users': User.objects.filter(is_active=True).count(),
+            'last_registered': User.objects.order_by('-created').first().created if User.objects.exists() else None
+        }
+        data = paginate(
+            request=request, 
+            queryset=query, 
+            serializer_class=UserSerializer, 
+            # per_page=4, 
+            # wrap='users',
+            additional_data=additional_data
+        )
+        
+        return Response(data, status=status.HTTP_200_OK)
+    
+    
+    def get_single_user(self, request, user_id):
+        user = User.objects.get(uuid=user_id)
+        serializer = UserSerializer(user)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+
     def the_query_check(self, request):
         from django_petra.helpers import get_request_data, get_all_request_data, get_request_headers
         

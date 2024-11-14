@@ -29,6 +29,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# APPEND_SLASH = False
+
 
 # Application definition
 
@@ -44,6 +46,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'modules.common.middleware.authorization_middleware.AuthorizationMiddleware',
+    'modules.common.middleware.ratelimit_middleware.RateLimitMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -161,3 +164,5 @@ EMAIL_USE_SSL = False
 EMAIL_HOST_USER = os.getenv('MAIL_USERNAME')
 EMAIL_HOST_PASSWORD = os.getenv('MAIL_PASSWORD')
 DEFAULT_FROM_EMAIL=os.getenv('MAIL_FROM_ADDRESS')
+
+RATE_LIMIT_PER_MINUTE = 60
